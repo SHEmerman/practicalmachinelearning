@@ -8,7 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="Steven Emerman" />
 
 
 <title>Practical Machine Learning Course Project</title>
@@ -62,8 +61,6 @@ img {
 
 <div id="header">
 <h1 class="title">Practical Machine Learning Course Project</h1>
-<h4 class="author"><em>Steven Emerman</em></h4>
-<h4 class="date"><em>Thursday, April 28, 2016</em></h4>
 </div>
 
 
@@ -96,6 +93,7 @@ exercise_testing &lt;- exercise_testing [-c(1:7,12:36,50:59,69:83,87:101,103:112
 <pre class="r"><code>## Fit the model using the random forest method using all default parameters.
 ## This includes cross-validation using bootstrap resampling with 25 replicates.
 
+set.seed (1234)
 modelFit &lt;- train (exercise_training$classe ~ ., method = &quot;rf&quot;, 
                    data = exercise_training)
 print(modelFit)</code></pre>
@@ -111,9 +109,9 @@ print(modelFit)</code></pre>
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy   Kappa    
-##    2    0.9923116  0.9902693
-##   27    0.9920551  0.9899444
-##   52    0.9835482  0.9791777
+##    2    0.9927893  0.9908766
+##   27    0.9927021  0.9907660
+##   52    0.9843011  0.9801348
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was mtry = 2.</code></pre>
@@ -125,13 +123,13 @@ print(modelFit)</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 2
 ## 
-##         OOB estimate of  error rate: 0.43%
+##         OOB estimate of  error rate: 0.41%
 ## Confusion matrix:
 ##      A    B    C    D    E  class.error
-## A 5578    2    0    0    0 0.0003584229
-## B   12 3780    5    0    0 0.0044772189
-## C    0   17 3403    2    0 0.0055523086
-## D    0    0   39 3175    2 0.0127487562
+## A 5579    1    0    0    0 0.0001792115
+## B   12 3782    3    0    0 0.0039504872
+## C    0   21 3400    1    0 0.0064289889
+## D    0    0   34 3180    2 0.0111940299
 ## E    0    0    0    6 3601 0.0016634322</code></pre>
 <p>The OOB (out-of-bag) estimate is an estimate of the out-of-sample error rate. In this case, the out-of-sample error rate is estimated as 0.44%.</p>
 <p>The random forest model was then used to predict the classe variable for the testing set.</p>
